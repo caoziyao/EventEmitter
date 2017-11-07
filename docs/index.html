@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EventEmitter</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="../until.js"></script>
+    <script type="text/javascript" src="../eventEmitter.js"></script>
+    <script type="text/javascript">
+
+      const handleOne = (a, b, c) => {
+        log('第一个监听函数', a, b, c)
+      }
+
+      const handleSecond = (a, b, c) => {
+        log('第二个监听函数', a, b, c)
+      }
+
+      const handleThird= (a, b, c) => {
+        log('第三个监听函数', a, b, c)
+      }
+
+      const __main = () => {
+        var emitter = EventEmitter.new()
+
+        emitter.on('demo', handleOne)
+              .on("demo", handleThird)
+              .once("demo", handleSecond)
+
+        emitter.emit('demo', [1, 2, 3])
+        emitter.emit('demo', [1, 2, 3])
+
+        emitter.allOff('demo')
+
+        emitter.emit('demo', [1, 2, 3])
+        emitter.emit('demo', [1, 2, 3])
+
+
+      }
+
+      __main()
+
+    </script>
+  </body>
+</html>
